@@ -16,8 +16,10 @@ The marketing site for [Anselm](https://github.com/Cookiezisg/Anselm), served at
 
 ## Screenshots
 
-`src/assets/shots/<locale>/<name>.png` are real macOS window captures of the
-desktop app, 13 per locale, taken from the `story` demo dataset in the main repo
+`src/assets/shots/<locale>/<name>.png` (light) and
+`src/assets/shots/<locale>-dark/<name>.png` (dark) are real macOS window captures
+of the desktop app, 13 per locale and theme; the page shows the variant that
+matches its theme, taken from the `story` demo dataset in the main repo
 (`make -C frontend demo DATASET=story LOCALE=en|zh`). Both locales show the same scenario: a scheduled weekly GitHub
 digest built by the AI in chat, with an approval step before the document is
 saved. A missing file renders a placeholder so the site always builds.

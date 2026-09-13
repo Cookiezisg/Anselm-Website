@@ -1,9 +1,12 @@
 ---
 /**
- * A real macOS window screenshot of the desktop app, per locale.
- * Files live in src/assets/shots/<locale>/<name>.png. When a locale is missing
- * we fall back to English, and when nothing exists yet we render a placeholder
- * so the site builds before the capture pass has run.
+ * A real macOS window screenshot of the desktop app, per locale and theme.
+ * Files live in src/assets/shots/<locale>/<name>.png (light) and
+ * src/assets/shots/<locale>-dark/<name>.png (dark). Both variants are rendered
+ * and CSS shows the one matching the page theme, so the manual toggle swaps
+ * screenshots too; the hidden one stays unloaded because it is lazy and has no
+ * layout box. When a locale is missing we fall back to English, and when nothing
+ * exists yet we render a placeholder so the site builds before the capture pass.
  */
 import { Image } from 'astro:assets';
 import type { Locale } from '../i18n';
@@ -14,10 +17,14 @@ const { name, locale, alt, full = false, loading = 'lazy', sizes = '(max-width: 
 const all = import.meta.glob<{ default: ImageMetadata }>('../assets/shots/*/*.png', { eager: true });
 const pick = (loc: string) => all[`../assets/shots/${loc}/${name}.png`]?.default;
 const img = pick(locale) ?? pick('en');
+const dark = pick(`${locale}-dark`) ?? pick('en-dark');
 ---
 <figure class:list={['shot-stage', { full }, Astro.props.class]}>
   {img ? (
-    <Image src={img} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes={sizes} fetchpriority={priority ? "high" : undefined} format="webp" quality={82} />
+    <>
+      <Image class="shot-light" src={img} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes={sizes} fetchpriority={priority ? "high" : undefined} format="webp" quality={82} />
+      {dark && <Image class="shot-dark" src={dark} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes={sizes} format="webp" quality={82} />}
+    </>
   ) : (
     <div class="shot-placeholder" role="img" aria-label={alt}>
       <span>{name}</span>
