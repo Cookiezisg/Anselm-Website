@@ -8,8 +8,8 @@
 import { Image } from 'astro:assets';
 import type { Locale } from '../i18n';
 
-interface Props { name: string; locale: Locale; alt: string; full?: boolean; loading?: 'eager' | 'lazy'; class?: string }
-const { name, locale, alt, full = false, loading = 'lazy' } = Astro.props;
+interface Props { name: string; locale: Locale; alt: string; full?: boolean; loading?: 'eager' | 'lazy'; sizes?: string; priority?: boolean; class?: string }
+const { name, locale, alt, full = false, loading = 'lazy', sizes = '(max-width: 1120px) 100vw, 1120px', priority = false } = Astro.props;
 
 const all = import.meta.glob<{ default: ImageMetadata }>('../assets/shots/*/*.png', { eager: true });
 const pick = (loc: string) => all[`../assets/shots/${loc}/${name}.png`]?.default;
@@ -17,7 +17,7 @@ const img = pick(locale) ?? pick('en');
 ---
 <figure class:list={['shot-stage', { full }, Astro.props.class]}>
   {img ? (
-    <Image src={img} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes="(max-width: 1120px) 100vw, 1120px" format="webp" quality={82} />
+    <Image src={img} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes={sizes} fetchpriority={priority ? "high" : undefined} format="webp" quality={82} />
   ) : (
     <div class="shot-placeholder" role="img" aria-label={alt}>
       <span>{name}</span>

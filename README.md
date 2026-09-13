@@ -6,8 +6,7 @@ The marketing site for [Anselm](https://github.com/Cookiezisg/Anselm), served at
 ## Stack
 
 - [Astro](https://astro.build) with static output. No client framework; the only
-  scripts are the product-surface tabs and the GitHub Releases lookup on the
-  download page.
+  script is the GitHub Releases lookup on the download page.
 - `src/styles/tokens.css` is a copy of the desktop client's design tokens
   (`demo/core/tokens.css` in the main repo). Every color, radius, shadow, and
   motion value on the site comes from that file so the site and the app share
@@ -17,9 +16,9 @@ The marketing site for [Anselm](https://github.com/Cookiezisg/Anselm), served at
 
 ## Screenshots
 
-`src/assets/shots/<locale>/<surface>.png` are real macOS window captures of the
-desktop app (`chat`, `entities`, `scheduler`, `notifications`, `library`,
-`settings`). Both locales show the same scenario: a scheduled weekly GitHub
+`src/assets/shots/<locale>/<name>.png` are real macOS window captures of the
+desktop app, 13 per locale, taken from the `story` demo dataset in the main repo
+(`make -C frontend demo DATASET=story LOCALE=en|zh`). Both locales show the same scenario: a scheduled weekly GitHub
 digest built by the AI in chat, with an approval step before the document is
 saved. A missing file renders a placeholder so the site always builds.
 
@@ -34,5 +33,8 @@ make verify   # astro check + build
 ## Deploy
 
 Pushes to `main` build and publish through `.github/workflows/deploy.yml`.
-The Pages source must be set to GitHub Actions once in the repository settings;
-`public/CNAME` pins the custom domain.
+The Pages source is set to GitHub Actions in the repository settings, and the
+custom domain `anselm.website` is configured there too (with Enforce HTTPS).
+`public/CNAME` is only a reminder: Actions-based deploys ignore it. DNS lives in
+Cloudflare: four apex A records to GitHub Pages and `www` as a CNAME to
+`cookiezisg.github.io`, both DNS-only so GitHub can issue the certificate.

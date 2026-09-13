@@ -14,7 +14,7 @@ interface Props {
 
 const { locale, path } = Astro.props;
 const dict = t(locale);
-const title = Astro.props.title ?? dict.meta.title;
+const title = (Astro.props.title ?? dict.meta.title).replace(/[.。](?= — Anselm$)/, '');
 const description = Astro.props.description ?? dict.meta.description;
 const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://anselm.website';
 const canonical = `${site}${locale === 'en' ? '' : '/zh'}${path}`;
@@ -42,7 +42,12 @@ const htmlLang = locale === 'zh' ? 'zh-CN' : 'en';
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'zh' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:locale:alternate" content={locale === 'zh' ? 'en_US' : 'zh_CN'} />
     <meta property="og:image" content={`${site}/og.png`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>

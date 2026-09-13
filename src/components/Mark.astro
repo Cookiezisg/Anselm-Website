@@ -1,8 +1,8 @@
 ---
-interface Props { size?: number }
-const { size = 18 } = Astro.props;
+interface Props { size?: number; label?: string }
+const { size = 18, label } = Astro.props;
 ---
-<svg width={size} height={size} viewBox="106 106 300 300" fill="currentColor" role="img" aria-label="Anselm">
+<svg width={size} height={size} viewBox="106 106 300 300" fill="currentColor" role={label ? "img" : undefined} aria-label={label} aria-hidden={label ? undefined : "true"}>
   <rect x="106" y="106" width="88" height="88" />
   <rect x="212" y="106" width="88" height="88" />
   <rect x="318" y="106" width="88" height="88" />

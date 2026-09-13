@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHead from '../components/PageHead.astro';
+import { t, href } from '../i18n';
+const en = t('en');
+const zh = t('zh');
+---
+<Base locale="en" path="/404/" title={`${en.notFound.title} — Anselm`}>
+  <PageHead eyebrow="404" title={en.notFound.title} lead={en.notFound.lead} />
+  <section class="section section-tight">
+    <div class="wrap">
+      <p><a class="btn btn-primary" href={href('en', '/')}>{en.notFound.home}</a></p>
+      <p class="shot-caption" lang="zh-CN">{zh.notFound.lead} <a href={href('zh', '/')}>{zh.notFound.home}</a></p>
+    </div>
+  </section>
+</Base>

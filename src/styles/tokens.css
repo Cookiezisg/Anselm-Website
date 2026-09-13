@@ -136,3 +136,26 @@
   --shadow-pop:    0 8px 24px rgba(0,0,0,.55), 0 20px 50px rgba(0,0,0,.6);
   --shadow-win:    0 16px 50px rgba(0,0,0,.5);
 }
+
+/* System dark preference, unless the viewer explicitly chose light. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --ink: #f5f5f7;  --ink-2: #a1a1a6;  --ink-3: #6e6e73;  --ink-on-accent: #ffffff;
+  --desk: #000000;
+  --sea: #0a0a0a;  --island: #1c1c1e;  --island-2: #232326;  --island-3: #2a2a2d;  --island-4: #323236;
+  --line: rgba(255,255,255,.10);  --line-strong: rgba(255,255,255,.16);  --scrim: rgba(0,0,0,.5);
+  --accent: #0a84ff;  --accent-hover: #409cff;  --accent-soft: rgba(10,132,255,.16);  --accent-line: rgba(10,132,255,.40);
+  --ok: #30d158;  --ok-soft: rgba(48,209,88,.16);
+  --warn: #ff9f0a;  --warn-soft: rgba(255,159,10,.16);
+  --danger: #ff453a;  --danger-soft: rgba(255,69,58,.16);
+  --live: #0a84ff;
+  --violet: #a78bfa;  --violet-soft: rgba(167,139,250,.18);
+  --teal:   #2dd4bf;  --teal-soft:   rgba(45,212,191,.18);
+  --edge:   rgba(255,255,255,.28);  --edge-future: rgba(255,255,255,.12);  --grid-dot: rgba(255,255,255,.05);
+  --cd-com: #7f848e;  --cd-kw: #c678dd;  --cd-str: #98c379;  --cd-num: #d19a66;  --cd-fn: #61afef;
+  --shadow-island: 0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.5);
+  --shadow-float:  0 1px 3px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.5);
+  --shadow-pop:    0 8px 24px rgba(0,0,0,.55), 0 20px 50px rgba(0,0,0,.6);
+  --shadow-win:    0 16px 50px rgba(0,0,0,.5);
+  }
+}

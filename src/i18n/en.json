@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Anselm — The Agentic Workflow Platform That Builds Itself",
-    "description": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine."
+    "description": "Anselm is a local-first agentic workflow platform. Describe what you need and the AI creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine with SQLite, approvals, and full run history."
   },
   "nav": {
     "product": "Product",
@@ -10,13 +10,14 @@
     "docs": "Docs",
     "github": "GitHub",
     "download": "Download",
-    "switchLocale": "中文"
+    "switchLocale": "中文",
+    "primary": "Primary"
   },
   "hero": {
     "eyebrow": "Local-first · Durable · macOS, Linux, Windows",
     "title": "The Agentic Workflow Platform That Builds Itself.",
     "lead": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine. No orchestration code, no infrastructure to manage.",
-    "primary": "Download for macOS",
+    "primary": "Get Anselm",
     "secondary": "See how it works",
     "shotAlt": "Anselm desktop app showing a conversation that created a weekly digest workflow and is waiting for approval"
   },
@@ -43,22 +44,22 @@
       {
         "shot": "notifications",
         "name": "Supervise",
-        "body": "Approvals, failures, and completions land in a durable ledger. Approve from the notification, the run continues, and the digest is filed in the Library."
+        "body": "Approvals, failures, and completions land in a durable ledger. Approve from the notification, the run continues, and the draft in the Library is published."
       }
     ],
     "cta": "Read the full walkthrough"
   },
   "surfaces": {
     "eyebrow": "Product",
-    "title": "One Desktop App, Six Surfaces.",
-    "lead": "Chat is where work starts. The other five surfaces let you inspect, schedule, supervise, and configure everything the AI built.",
+    "title": "One Desktop App. Everything the AI Builds, in View.",
+    "lead": "Chat is where work starts. The other surfaces let you inspect, schedule, supervise, and configure everything the AI built.",
     "more": "Explore",
     "items": [
       {
         "key": "chat",
         "name": "Chat",
         "body": "Where work starts. Ask, attach, mention, and watch entities appear as the conversation goes.",
-        "lead": "A conversation is the front door to everything Anselm can build and run. Each thread keeps its own residency, attachments, tools, and a live activity panel.",
+        "lead": "A conversation is the front door to everything Anselm can build and run. Each thread keeps its own working directory, attachments, tools, and a live activity panel.",
         "points": [
           {
             "name": "Builds while you talk",
@@ -144,7 +145,7 @@
           },
           {
             "name": "scheduler",
-            "caption": "A workflow's operations page with the run matrix and an expanded run showing its Gantt."
+            "caption": "The run list with one run expanded into its Gantt, and the cron trigger below."
           },
           {
             "name": "scheduler-run",
@@ -190,7 +191,7 @@
           },
           {
             "name": "Written by workflows, edited by you",
-            "body": "The digest a workflow produced is a normal page: outline, headings, tables, code blocks, and images."
+            "body": "The digest a workflow produced is a normal page: outline, headings, lists, and code blocks."
           },
           {
             "name": "Skills",
@@ -239,7 +240,7 @@
   "how": {
     "eyebrow": "How it works",
     "title": "From a Conversation to a Running Workflow.",
-    "lead": "This is the full path of one request, using real screens from the app. The request: every Monday at 09:00, collect last week's GitHub activity, write a digest, wait for approval, and file it in the Library.",
+    "lead": "This is the full path of one request, using real screens from the app. The request: every Monday at 09:00, collect the last two weeks of GitHub activity, write a digest, wait for approval, and file it in the Library.",
     "steps": [
       {
         "shot": "chat",
@@ -249,38 +250,38 @@
       {
         "shot": "workflow-editor",
         "name": "2 · The workflow exists",
-        "body": "A cron trigger, three parallel GitHub fetches, an Agent that writes the digest, a Control node that skips empty weeks, an approval node, and two Handlers that file and announce. Open the graph editor and every node exposes its mapping, retry policy, and branches."
+        "body": "A cron trigger, three parallel GitHub fetches, an Agent that writes the digest, a Control node that skips empty weeks, an approval node, a Function that files the document, and a Handler that announces it. Open the graph editor and every node shows its input mapping and retry policy; control nodes also show their routing branches."
       },
       {
         "shot": "scheduler-workflow",
-        "name": "3 · The first run fails, and that is fine",
-        "body": "The first manual run failed at the fetch node. Anselm fixed the Function, published version 2, and triggered a fresh run. Both runs stay in the matrix."
+        "name": "3 · A run fails, then gets fixed",
+        "body": "An earlier run failed at fetch_commits with a 502 from GitHub. Anselm added retry with backoff to the Function, published version 2, and every later run used it. All runs stay in the matrix, including the failed one."
       },
       {
         "shot": "scheduler",
         "name": "4 · A run waits for you",
-        "body": "The second run collected 32 commits, wrote the digest, and parked at the approval node. The Gantt shows exactly where time went."
+        "body": "The latest run collected 32 commits, wrote the digest, and parked at the approval node. The Gantt shows exactly where time went."
       },
       {
         "shot": "notifications",
         "name": "5 · Approve from the ledger",
-        "body": "The approval request is rendered in the notification ledger with the full digest. Approve, and the run resumes from that node."
+        "body": "The approval request is rendered in the notification ledger with the digest summary and counts. Approve, and the run resumes from that node."
       },
       {
         "shot": "library",
-        "name": "6 · The digest is filed",
-        "body": "The document lands in Weekly digests with tags, an outline, and backlinks. Next Monday the cron fires on its own."
+        "name": "6 · The draft is ready to publish",
+        "body": "The draft is already in Weekly digests, tagged draft, with an outline and backlinks. Approval publishes it. Next Monday the cron fires on its own."
       }
     ]
   },
   "durablePage": {
     "eyebrow": "Durable execution",
     "title": "Built for Unattended Execution.",
-    "lead": "Workflows that run while you are away need more than retries. Anselm records every node result, pins versions for in-flight runs, pauses for human approval when a step needs it, and picks up exactly where it stopped after a restart.",
+    "lead": "This page covers the execution model behind every scheduled run. Anselm records each node result, pins versions for in-flight runs, pauses for human approval when a step needs it, and picks up exactly where it stopped after a restart.",
     "topics": [
       {
         "shot": "scheduler",
-        "name": "Record once, replay never",
+        "name": "Completed steps never run twice",
         "body": "Each node result is written to the database as it completes. On recovery the interpreter re-walks the graph, reuses completed nodes, and only executes what has not run. External side effects are never repeated."
       },
       {
@@ -306,7 +307,7 @@
     "body": "Workflows that run while you are away need more than retries. Anselm records every node result, pins versions for in-flight runs, pauses for human approval when a step needs it, and picks up exactly where it stopped after a restart.",
     "points": [
       {
-        "name": "Record once, replay never",
+        "name": "Completed steps never run twice",
         "body": "Completed nodes are reused on recovery. External side effects are not repeated."
       },
       {
@@ -330,7 +331,7 @@
     "items": [
       {
         "name": "Workflows",
-        "body": "Static graphs of triggers, actions, agents, controls, and approvals with typed edges."
+        "body": "Graphs of triggers, code, agents, controls, and approvals."
       },
       {
         "name": "Agents",
@@ -373,7 +374,7 @@
         "Managed models with no key setup",
         "Image, speech, and video generation",
         "Bring your own OpenAI, Gemini, Qwen, DeepSeek keys",
-        "Device-bound proof, no account required"
+        "No account or sign-up required"
       ]
     }
   },
@@ -390,7 +391,10 @@
     "windows": "Windows",
     "comingSoon": "First release coming soon",
     "allReleases": "All releases on GitHub",
-    "version": "Version"
+    "version": "Version",
+    "viewReleases": "View releases",
+    "fromGithub": "Builds are published on GitHub Releases",
+    "rateLimited": "Open GitHub Releases to download"
   },
   "footer": {
     "tagline": "The agentic workflow platform that builds itself.",
@@ -400,7 +404,8 @@
     "architecture": "Architecture",
     "releases": "Releases",
     "license": "License",
-    "copyright": "© 2026 Anselm"
+    "copyright": "© 2026 Anselm",
+    "chat": "Chat"
   },
   "service": {
     "eyebrow": "Service domain",
@@ -421,5 +426,10 @@
       }
     ],
     "footer": "Service domain"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "lead": "The page you asked for does not exist. It may have moved when the site was reorganized.",
+    "home": "Back to home"
   }
 }

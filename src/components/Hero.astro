@@ -15,6 +15,6 @@ const d = t(locale);
       <a class="btn btn-primary" href={href(locale, '/download/')}>{d.hero.primary}</a>
       <a class="btn btn-secondary" href={href(locale, '/how-it-works/')}>{d.hero.secondary}</a>
     </div>
-    <Shot name="chat" locale={locale} alt={d.hero.shotAlt} loading="eager" />
+    <Shot name="chat" locale={locale} alt={d.hero.shotAlt} loading="eager" priority />
   </div>
 </section>

@@ -15,12 +15,12 @@ const isActive = (p: string) => path.startsWith(p);
       <Mark />
       <span>Anselm</span>
     </a>
-    <nav class="nav-links" aria-label="Primary">
-      <a class="hide-sm" href={href(locale, '/product/chat/')} aria-current={isActive('/product/') ? 'page' : undefined}>{d.nav.product}</a>
+    <nav class="nav-links" aria-label={d.nav.primary}>
+      <a href={href(locale, '/product/chat/')} aria-current={isActive('/product/') ? 'page' : undefined}>{d.nav.product}</a>
       <a class="hide-sm" href={href(locale, '/how-it-works/')} aria-current={isActive('/how-it-works/') ? 'page' : undefined}>{d.nav.howItWorks}</a>
       <a class="hide-sm" href={href(locale, '/durable-execution/')} aria-current={isActive('/durable-execution/') ? 'page' : undefined}>{d.nav.durable}</a>
       <a class="hide-sm" href={DOCS} rel="noopener">{d.nav.docs}</a>
-      <a href={REPO} rel="noopener">{d.nav.github}</a>
+      <a class="hide-sm" href={REPO} rel="noopener">{d.nav.github}</a>
       <a href={switchHref} lang={other === 'zh' ? 'zh-CN' : 'en'}>{d.nav.switchLocale}</a>
       <a class="btn btn-primary btn-sm" href={href(locale, '/download/')}>{d.nav.download}</a>
     </nav>

@@ -11,7 +11,7 @@ const d = t(locale);
 <PageHead eyebrow={d.how.eyebrow} title={d.how.title} lead={d.how.lead} />
 <section class="section section-tight">
   <div class="wrap">
-    <ol class="walkthrough" style="list-style:none;margin:0;padding:0">
+    <ol role="list" class="walkthrough" style="list-style:none;margin:0;padding:0">
       {d.how.steps.map((s, i) => (
         <li class="walk-step">
           <div class="walk-copy">

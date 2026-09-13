@@ -4,6 +4,6 @@ import Download from '../../components/Download.astro';
 import { t } from '../../i18n';
 const d = t('zh');
 ---
-<Base locale="zh" path="/download/" title={`${d.download.title} — Anselm`}>
-  <Download locale="zh" />
+<Base locale="zh" path="/download/" title={`${d.download.title} — Anselm`} description={d.download.lead}>
+  <Download locale="zh" heading="h1" />
 </Base>

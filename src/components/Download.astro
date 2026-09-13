@@ -1,8 +1,9 @@
 ---
 import { t, RELEASES, type Locale } from '../i18n';
-interface Props { locale: Locale }
-const { locale } = Astro.props;
+interface Props { locale: Locale; heading?: 'h1' | 'h2' }
+const { locale, heading = 'h2' } = Astro.props;
 const d = t(locale);
+const Heading = heading;
 
 const platforms = [
   { key: 'macos', label: d.download.macos, match: /\.(dmg|zip)$/i, hint: /(mac|darwin|osx)/i,
@@ -15,7 +16,7 @@ const platforms = [
 ---
 <section class="section" id="download">
   <div class="wrap" style="text-align:center">
-    <h2>{d.download.title}</h2>
+    <Heading>{d.download.title}</Heading>
     <p class="lead" style="margin-left:auto;margin-right:auto;max-width:520px">{d.download.lead}</p>
     <div class="dl-grid" data-releases="Cookiezisg/Anselm">
       {platforms.map((p) => (
@@ -24,33 +25,44 @@ const platforms = [
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={p.icon} />
             {p.label}
           </h3>
-          <p class="dl-meta" data-meta>{d.download.comingSoon}</p>
-          <a class="btn btn-secondary" data-link href={RELEASES} rel="noopener">{d.nav.download}</a>
+          <p class="dl-meta" data-meta>{d.download.fromGithub}</p>
+          <a class="btn btn-secondary" data-link href={RELEASES} rel="noopener">{d.download.viewReleases}</a>
         </article>
       ))}
     </div>
     <p class="dl-more"><a href={RELEASES} rel="noopener">{d.download.allReleases}</a></p>
   </div>
 </section>
-<script define:vars={{ versionLabel: d.download.version }}>
-  // Fill each platform card from the latest GitHub release. Any failure keeps the
-  // static "coming soon" state and the link to the releases page.
+<script is:inline define:vars={{ labels: { version: d.download.version, download: d.nav.download, comingSoon: d.download.comingSoon, rateLimited: d.download.rateLimited } }}>
+  // Fill each platform card from the latest GitHub release. Only a 404 means
+  // "no release yet"; rate limits and network errors keep the neutral state and
+  // point at the releases page, never at a fake "coming soon".
+  // 只有 404 才代表"还没有发布"；限流和网络错误保持中性文案并指向发布页，
+  // 不能冒充"即将发布"。
   const grid = document.querySelector('[data-releases]');
   if (grid) {
     const repo = grid.getAttribute('data-releases');
+    const cards = [...grid.querySelectorAll('[data-platform]')];
+    const setMeta = (text) => cards.forEach((c) => { c.querySelector('[data-meta]').textContent = text; });
     fetch(`https://api.github.com/repos/${repo}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((r) => {
+        if (r.status === 404) { setMeta(labels.comingSoon); return null; }
+        if (r.status === 403 || r.status === 429) { setMeta(labels.rateLimited); return null; }
+        return r.ok ? r.json() : null;
+      })
       .then((rel) => {
+        if (!rel) return;
         const assets = Array.isArray(rel.assets) ? rel.assets : [];
-        for (const card of grid.querySelectorAll('[data-platform]')) {
+        for (const card of cards) {
           const match = new RegExp(card.getAttribute('data-match'), 'i');
           const hint = new RegExp(card.getAttribute('data-hint'), 'i');
-          const asset = assets.find((a) => match.test(a.name) && hint.test(a.name)) ?? assets.find((a) => match.test(a.name));
+          const asset = assets.find((a) => match.test(a.name) && hint.test(a.name));
           if (!asset) continue;
-          const mb = Math.round(asset.size / 1048576);
-          card.querySelector('[data-meta]').textContent = `${versionLabel} ${rel.tag_name} · ${mb} MB`;
+          const mb = Math.max(0.1, asset.size / 1048576).toFixed(1);
+          card.querySelector('[data-meta]').textContent = `${labels.version} ${rel.tag_name} · ${mb} MB`;
           const link = card.querySelector('[data-link]');
           link.href = asset.browser_download_url;
+          link.textContent = labels.download;
           link.classList.replace('btn-secondary', 'btn-primary');
         }
       })

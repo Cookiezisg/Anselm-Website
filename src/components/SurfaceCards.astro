@@ -15,7 +15,7 @@ const d = t(locale);
     <div class="surface-cards">
       {d.surfaces.items.map((s) => (
         <a class="surface-card" href={href(locale, `/product/${s.key}/`)}>
-          <Shot name={s.key} locale={locale} alt={s.body} full class="surface-thumb" />
+          <Shot name={s.key} locale={locale} alt="" full class="surface-thumb" sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 360px" />
           <div class="surface-copy">
             <h3>{s.name}</h3>
             <p>{s.body}</p>
