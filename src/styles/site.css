@@ -108,7 +108,16 @@ h3 { font-size: var(--t-h3); letter-spacing: -0.01em; }
 .nav-links { display: flex; align-items: center; gap: var(--sp-6); font-size: var(--t-body); color: var(--ink-2); }
 .nav-links a:hover { color: var(--ink); }
 .nav-links .btn { color: var(--sea); }
-.nav-toggle { display: none; }
+.theme-toggle { display: inline-grid; place-items: center; width: var(--row); height: var(--row); border: 0; border-radius: var(--r-chip); background: transparent; color: var(--ink-2); cursor: pointer; }
+.theme-toggle:hover { color: var(--ink); background: var(--island-2); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
 
 /* ───── Hero ───── */
 .hero { padding: 96px 0 0; text-align: center; }

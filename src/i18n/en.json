@@ -11,7 +11,8 @@
     "github": "GitHub",
     "download": "Download",
     "switchLocale": "中文",
-    "primary": "Primary"
+    "primary": "Primary",
+    "theme": "Toggle dark mode"
   },
   "hero": {
     "eyebrow": "Local-first · Durable · macOS, Linux, Windows",

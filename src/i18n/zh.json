@@ -11,7 +11,8 @@
     "github": "GitHub",
     "download": "下载",
     "switchLocale": "English",
-    "primary": "主导航"
+    "primary": "主导航",
+    "theme": "切换深色模式"
   },
   "hero": {
     "eyebrow": "本地优先 · 持久执行 · macOS、Linux、Windows",

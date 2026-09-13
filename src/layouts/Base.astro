@@ -27,6 +27,12 @@ const htmlLang = locale === 'zh' ? 'zh-CN' : 'en';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply a remembered theme before first paint; without a stored choice the
+      // page follows prefers-color-scheme through CSS alone.
+      // 首帧前应用记住的主题;没有存储值时由 CSS 跟随系统偏好。
+      try { const t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (_) {}
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
