@@ -1,0 +1,26 @@
+---
+import { t, href, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="section" id="durable">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <p class="eyebrow">{d.durable.eyebrow}</p>
+        <h2>{d.durable.title}</h2>
+        <p class="lead">{d.durable.body}</p>
+        <p class="section-cta" style="text-align:left"><a class="btn btn-secondary" href={href(locale, '/durable-execution/')}>{d.durable.cta}</a></p>
+      </div>
+      <div class="points">
+        {d.durable.points.map((p) => (
+          <div class="point">
+            <h3>{p.name}</h3>
+            <p>{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

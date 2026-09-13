@@ -1,0 +1,25 @@
+---
+import Shot from './Shot.astro';
+import PageHead from './PageHead.astro';
+import Cta from './Cta.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<PageHead eyebrow={d.durablePage.eyebrow} title={d.durablePage.title} lead={d.durablePage.lead} />
+<section class="section section-tight">
+  <div class="wrap">
+    {d.durablePage.topics.map((tp, i) => (
+      <div class="topic">
+        <div class="topic-copy">
+          <h2>{tp.name}</h2>
+          <p>{tp.body}</p>
+        </div>
+        <Shot name={tp.shot} locale={locale} alt={tp.body} full loading={i === 0 ? 'eager' : 'lazy'} />
+      </div>
+    ))}
+  </div>
+</section>
+<Cta locale={locale} />

@@ -1,0 +1,27 @@
+---
+import Shot from './Shot.astro';
+import PageHead from './PageHead.astro';
+import Cta from './Cta.astro';
+import { t, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<PageHead eyebrow={d.how.eyebrow} title={d.how.title} lead={d.how.lead} />
+<section class="section section-tight">
+  <div class="wrap">
+    <ol class="walkthrough" style="list-style:none;margin:0;padding:0">
+      {d.how.steps.map((s, i) => (
+        <li class="walk-step">
+          <div class="walk-copy">
+            <h2>{s.name}</h2>
+            <p>{s.body}</p>
+          </div>
+          <Shot name={s.shot} locale={locale} alt={s.body} full loading={i === 0 ? 'eager' : 'lazy'} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+<Cta locale={locale} />

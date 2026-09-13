@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import DurablePage from '../../components/DurablePage.astro';
+import { t } from '../../i18n';
+const d = t('zh');
+---
+<Base locale="zh" path="/durable-execution/" title={`${d.durablePage.title} — Anselm`} description={d.durablePage.lead}>
+  <DurablePage locale="zh" />
+</Base>

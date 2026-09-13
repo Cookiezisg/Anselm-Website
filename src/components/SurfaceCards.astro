@@ -1,0 +1,28 @@
+---
+import Shot from './Shot.astro';
+import { t, href, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="section" id="product">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{d.surfaces.eyebrow}</p>
+      <h2>{d.surfaces.title}</h2>
+      <p class="lead">{d.surfaces.lead}</p>
+    </div>
+    <div class="surface-cards">
+      {d.surfaces.items.map((s) => (
+        <a class="surface-card" href={href(locale, `/product/${s.key}/`)}>
+          <Shot name={s.key} locale={locale} alt={s.body} full class="surface-thumb" />
+          <div class="surface-copy">
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+            <span class="surface-more">{d.surfaces.more} →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

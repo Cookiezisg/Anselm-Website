@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import ServicePage from '../components/ServicePage.astro';
+import { t } from '../i18n';
+const d = t('en');
+---
+<Base locale="en" path="/service/" title={`${d.service.title} — Anselm`} description={d.service.lead}>
+  <ServicePage locale="en" />
+</Base>

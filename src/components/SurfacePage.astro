@@ -1,0 +1,59 @@
+---
+import Shot from './Shot.astro';
+import PageHead from './PageHead.astro';
+import Cta from './Cta.astro';
+import { t, href, type Locale } from '../i18n';
+
+interface Props { locale: Locale; surface: string }
+const { locale, surface } = Astro.props;
+const d = t(locale);
+const items = d.surfaces.items;
+const idx = items.findIndex((s) => s.key === surface);
+const s = items[idx];
+const prev = items[(idx + items.length - 1) % items.length];
+const next = items[(idx + 1) % items.length];
+const [primary, ...rest] = s.shots;
+---
+<PageHead eyebrow={d.surfaces.eyebrow} title={s.name} lead={s.lead} />
+<section class="section section-tight">
+  <div class="wrap">
+    <nav class="surface-tabs" aria-label={d.surfaces.title}>
+      {items.map((it) => (
+        <a href={href(locale, `/product/${it.key}/`)} aria-current={it.key === surface ? 'page' : undefined}>{it.name}</a>
+      ))}
+    </nav>
+    <Shot name={primary.name} locale={locale} alt={primary.caption} full loading="eager" />
+    <p class="shot-caption">{primary.caption}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="grid-3">
+      {s.points.map((p) => (
+        <article class="card">
+          <h3>{p.name}</h3>
+          <p>{p.body}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+{rest.length > 0 && (
+  <section class="section">
+    <div class="wrap">
+      {rest.map((sh) => (
+        <figure class="shot-block">
+          <Shot name={sh.name} locale={locale} alt={sh.caption} full />
+          <figcaption class="shot-caption">{sh.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+)}
+<section class="section">
+  <div class="wrap pager">
+    <a class="btn btn-secondary" href={href(locale, `/product/${prev.key}/`)}>← {prev.name}</a>
+    <a class="btn btn-secondary" href={href(locale, `/product/${next.key}/`)}>{next.name} →</a>
+  </div>
+</section>
+<Cta locale={locale} />

@@ -1,0 +1,37 @@
+---
+/**
+ * A real macOS window screenshot of the desktop app, per locale.
+ * Files live in src/assets/shots/<locale>/<name>.png. When a locale is missing
+ * we fall back to English, and when nothing exists yet we render a placeholder
+ * so the site builds before the capture pass has run.
+ */
+import { Image } from 'astro:assets';
+import type { Locale } from '../i18n';
+
+interface Props { name: string; locale: Locale; alt: string; full?: boolean; loading?: 'eager' | 'lazy'; class?: string }
+const { name, locale, alt, full = false, loading = 'lazy' } = Astro.props;
+
+const all = import.meta.glob<{ default: ImageMetadata }>('../assets/shots/*/*.png', { eager: true });
+const pick = (loc: string) => all[`../assets/shots/${loc}/${name}.png`]?.default;
+const img = pick(locale) ?? pick('en');
+---
+<figure class:list={['shot-stage', { full }, Astro.props.class]}>
+  {img ? (
+    <Image src={img} alt={alt} loading={loading} widths={[720, 1120, 1600, 2240]} sizes="(max-width: 1120px) 100vw, 1120px" format="webp" quality={82} />
+  ) : (
+    <div class="shot-placeholder" role="img" aria-label={alt}>
+      <span>{name}</span>
+    </div>
+  )}
+</figure>
+<style>
+  .shot-placeholder {
+    aspect-ratio: 1479 / 883;
+    background: var(--island);
+    border-radius: var(--r-chip) var(--r-chip) 0 0;
+    box-shadow: var(--shadow-win);
+    display: grid; place-items: center;
+    color: var(--ink-3); font-size: var(--t-meta); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .full .shot-placeholder { border-radius: var(--r-chip); }
+</style>

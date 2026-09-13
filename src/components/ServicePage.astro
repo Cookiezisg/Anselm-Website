@@ -1,0 +1,35 @@
+---
+/**
+ * The service-domain notice that used to live on the API server's placeholder
+ * page. It stays on the marketing site so the apex domain keeps a clear
+ * statement of scope and an abuse contact after the site moves to Pages.
+ * 这页承接原来 API 服务器占位页上的服务域名声明：站点迁到 Pages 之后，apex
+ * 域名仍要有明确的用途说明和滥用联系渠道。
+ */
+import PageHead from './PageHead.astro';
+import { t, REPO, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale).service;
+---
+<PageHead eyebrow={d.eyebrow} title={d.title} lead={d.lead} />
+<section class="service">
+  <div class="wrap">
+    {d.sections.map((s) => (
+      <div class="service-block">
+        <h2>{s.name}</h2>
+        <p>{s.body}</p>
+      </div>
+    ))}
+    <p class="service-links"><a href={REPO} rel="noopener">GitHub</a> · <code>api.anselm.website</code></p>
+  </div>
+</section>
+<style>
+  .service { padding-bottom: var(--sp-16); }
+  .service .wrap { max-width: 44rem; }
+  .service-block { margin-bottom: var(--sp-8); }
+  .service-block h2 { font-size: var(--t-h3); margin-bottom: var(--sp-2); }
+  .service-block p { color: var(--ink-2); }
+  .service-links { font-size: var(--t-meta); color: var(--ink-3); }
+</style>

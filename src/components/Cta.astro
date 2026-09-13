@@ -1,0 +1,15 @@
+---
+import { t, href, DOCS, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="cta">
+  <div class="wrap">
+    <h2>{d.cta.title}</h2>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={href(locale, '/download/')}>{d.cta.primary}</a>
+      <a class="btn btn-secondary" href={DOCS} rel="noopener">{d.cta.secondary}</a>
+    </div>
+  </div>
+</section>

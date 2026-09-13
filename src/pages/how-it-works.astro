@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import HowPage from '../components/HowPage.astro';
+import { t } from '../i18n';
+const d = t('en');
+---
+<Base locale="en" path="/how-it-works/" title={`${d.how.title} — Anselm`} description={d.how.lead}>
+  <HowPage locale="en" />
+</Base>

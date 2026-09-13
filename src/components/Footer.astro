@@ -1,0 +1,43 @@
+---
+import Mark from './Mark.astro';
+import { t, href, REPO, DOCS, ARCHITECTURE, RELEASES, LICENSE, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="brand" href={href(locale, '/')}><Mark /><span>Anselm</span></a>
+        <p class="muted">{d.footer.tagline}</p>
+      </div>
+      <div>
+        <h3>{d.footer.product}</h3>
+        <ul>
+          <li><a href={href(locale, '/product/chat/')}>{d.nav.product}</a></li>
+          <li><a href={href(locale, '/how-it-works/')}>{d.nav.howItWorks}</a></li>
+          <li><a href={href(locale, '/durable-execution/')}>{d.nav.durable}</a></li>
+          <li><a href={href(locale, '/download/')}>{d.nav.download}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>{d.footer.resources}</h3>
+        <ul>
+          <li><a href={DOCS} rel="noopener">{d.footer.docs}</a></li>
+          <li><a href={ARCHITECTURE} rel="noopener">{d.footer.architecture}</a></li>
+          <li><a href={RELEASES} rel="noopener">{d.footer.releases}</a></li>
+          <li><a href={REPO} rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>{d.footer.copyright}</span>
+      <span class="legal-links">
+        <a href={href(locale, '/service/')}>{d.service.footer}</a>
+        <a href={LICENSE} rel="noopener">{d.footer.license}</a>
+      </span>
+    </div>
+  </div>
+</footer>

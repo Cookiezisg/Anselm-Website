@@ -1,0 +1,425 @@
+{
+  "meta": {
+    "title": "Anselm — The Agentic Workflow Platform That Builds Itself",
+    "description": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine."
+  },
+  "nav": {
+    "product": "Product",
+    "howItWorks": "How it works",
+    "durable": "Durable execution",
+    "docs": "Docs",
+    "github": "GitHub",
+    "download": "Download",
+    "switchLocale": "中文"
+  },
+  "hero": {
+    "eyebrow": "Local-first · Durable · macOS, Linux, Windows",
+    "title": "The Agentic Workflow Platform That Builds Itself.",
+    "lead": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine. No orchestration code, no infrastructure to manage.",
+    "primary": "Download for macOS",
+    "secondary": "See how it works",
+    "shotAlt": "Anselm desktop app showing a conversation that created a weekly digest workflow and is waiting for approval"
+  },
+  "story": {
+    "eyebrow": "One request, start to finish",
+    "title": "From a Sentence to a Scheduled, Supervised Workflow.",
+    "lead": "Every screenshot on this page comes from the same workspace and the same request: a weekly digest of a GitHub repository, reviewed by a person before it is filed.",
+    "steps": [
+      {
+        "shot": "chat",
+        "name": "Describe",
+        "body": "Ask for the outcome in chat. Anselm plans the work, creates each building block, and reports what it built with links to every entity and run."
+      },
+      {
+        "shot": "entities-workflow",
+        "name": "Build",
+        "body": "The result is a real workflow: a cron trigger, a Function that calls GitHub, an Agent that writes the digest, an approval step, and a Function that files the document. All versioned."
+      },
+      {
+        "shot": "scheduler-overview",
+        "name": "Schedule",
+        "body": "The Scheduler shows what is running, what is waiting on you, what failed in the last 24 hours, and when the next fire is due."
+      },
+      {
+        "shot": "notifications",
+        "name": "Supervise",
+        "body": "Approvals, failures, and completions land in a durable ledger. Approve from the notification, the run continues, and the digest is filed in the Library."
+      }
+    ],
+    "cta": "Read the full walkthrough"
+  },
+  "surfaces": {
+    "eyebrow": "Product",
+    "title": "One Desktop App, Six Surfaces.",
+    "lead": "Chat is where work starts. The other five surfaces let you inspect, schedule, supervise, and configure everything the AI built.",
+    "more": "Explore",
+    "items": [
+      {
+        "key": "chat",
+        "name": "Chat",
+        "body": "Where work starts. Ask, attach, mention, and watch entities appear as the conversation goes.",
+        "lead": "A conversation is the front door to everything Anselm can build and run. Each thread keeps its own residency, attachments, tools, and a live activity panel.",
+        "points": [
+          {
+            "name": "Builds while you talk",
+            "body": "Tool cards show each Function, Agent, Trigger, and Workflow as it is created, edited, or run, with links into the entity and run pages."
+          },
+          {
+            "name": "Threads that live in a directory",
+            "body": "Attach a conversation to a working directory. Branches, worktrees, and file changes stay in that thread's context."
+          },
+          {
+            "name": "Human in the loop",
+            "body": "Dangerous actions wait for confirmation, questions wait for an answer, and approvals wait for a decision. State is persisted, so nothing is lost if you step away."
+          }
+        ],
+        "shots": [
+          {
+            "name": "chat",
+            "caption": "The digest workflow was built in one thread. The approval band at the top belongs to the run it started."
+          }
+        ]
+      },
+      {
+        "key": "entities",
+        "name": "Entities",
+        "body": "Every Function, Handler, Agent, and Workflow with versions, relations, and a live debug console.",
+        "lead": "Everything the AI builds is a first-class, versioned entity. Inspect the code, the configuration, the version history, and the executions of each one.",
+        "points": [
+          {
+            "name": "Four kinds of building blocks",
+            "body": "Functions run sandboxed code once. Handlers keep state across calls. Agents are LLM workers with tools and instructions. Workflows compose them into a graph."
+          },
+          {
+            "name": "Immutable versions, movable pointer",
+            "body": "Every edit creates a new version. Revert is a pointer move. In-flight runs keep the versions they started with."
+          },
+          {
+            "name": "Relations you can see",
+            "body": "The relationship graph shows which conversation created what, which workflow uses which Function, and which document a run produced."
+          }
+        ],
+        "shots": [
+          {
+            "name": "entities-function",
+            "caption": "A Function entity: syntax-highlighted code, version pointer, environment status, and a run console with the entry payload and recent executions."
+          },
+          {
+            "name": "entities",
+            "caption": "Overview with counts per kind, the relationship graph, and recently updated entities."
+          },
+          {
+            "name": "entities-workflow",
+            "caption": "A workflow entity: graph preview, active version, tags, and recent executions with a manual trigger."
+          },
+          {
+            "name": "workflow-editor",
+            "caption": "The graph editor: three parallel fetches fan in to the digest, a Control node routes on activity, and the inspector shows its input mapping, retry policy, and routing branches."
+          }
+        ]
+      },
+      {
+        "key": "scheduler",
+        "name": "Scheduler",
+        "body": "Triggers, upcoming runs, and a node timeline for every execution, including the ones that resumed.",
+        "lead": "The Scheduler is the operations view for workflows that run without you: triggers, upcoming fires, run history, and the exact state of every node.",
+        "points": [
+          {
+            "name": "Four trigger kinds",
+            "body": "Cron, webhook, file changes, and sensors. Overlap policy and deduplication are handled before a run is even created."
+          },
+          {
+            "name": "Matrix and Gantt",
+            "body": "Every run is a column of node states. Expand one to see a Gantt of how long each node took and where it is waiting."
+          },
+          {
+            "name": "Run dossier",
+            "body": "Pinned version, entry payload, pinned references, and a timeline. Replay a failed run from the failed node without re-running what already succeeded."
+          }
+        ],
+        "shots": [
+          {
+            "name": "scheduler-overview",
+            "caption": "Overview: running, waiting, failed in the last 24 hours, next fire, and the approvals waiting on you."
+          },
+          {
+            "name": "scheduler",
+            "caption": "A workflow's operations page with the run matrix and an expanded run showing its Gantt."
+          },
+          {
+            "name": "scheduler-run",
+            "caption": "The run dossier: pinned version, entry payload, pinned references, and the node timeline."
+          }
+        ]
+      },
+      {
+        "key": "notifications",
+        "name": "Notifications",
+        "body": "A durable ledger of approvals, completions, and failures, plus native OS notifications.",
+        "lead": "Anything that needs you, and anything you should know, is written to a durable ledger and mirrored to native OS notifications.",
+        "points": [
+          {
+            "name": "Needs you first",
+            "body": "Approval requests are grouped at the top with the rendered content and Approve and Reject actions."
+          },
+          {
+            "name": "Every outcome, one place",
+            "body": "Run completions, failures, environment repairs, key checks, and MCP mount warnings, each with a link to where it happened."
+          },
+          {
+            "name": "Nothing transient",
+            "body": "The ledger is the record. The top band and OS notifications are just the fast path to it."
+          }
+        ],
+        "shots": [
+          {
+            "name": "notifications",
+            "caption": "The ledger with an approval waiting, rendered from the workflow's approval node."
+          }
+        ]
+      },
+      {
+        "key": "library",
+        "name": "Library",
+        "body": "Documents and skills in a native editor, with outline, properties, and backlinks.",
+        "lead": "Documents and skills are knowledge the AI can read and write. Workflows file documents here, agents read them, and you edit them in a native editor.",
+        "points": [
+          {
+            "name": "A real document tree",
+            "body": "Folders, pages, tags, descriptions, and properties. Wikilinks between pages produce backlinks automatically."
+          },
+          {
+            "name": "Written by workflows, edited by you",
+            "body": "The digest a workflow produced is a normal page: outline, headings, tables, code blocks, and images."
+          },
+          {
+            "name": "Skills",
+            "body": "Reusable instruction bundles with files and allowed tools that agents can mount."
+          }
+        ],
+        "shots": [
+          {
+            "name": "library",
+            "caption": "The weekly digest filed by the workflow, with its outline, properties, and two backlinks."
+          },
+          {
+            "name": "library-onboarding",
+            "caption": "The Onboarding page: checklist, wikilinks to other pages, inline code, and a code block, all in the native editor."
+          }
+        ]
+      },
+      {
+        "key": "settings",
+        "name": "Settings",
+        "body": "Models and keys, MCP servers, storage, network, and shortcuts. Managed by default, BYOK when you want it.",
+        "lead": "Managed models work out of the box. Add your own provider keys, choose a model per scenario, mount MCP servers, and manage local storage and sandboxes.",
+        "points": [
+          {
+            "name": "Managed by default",
+            "body": "A free managed tier is provisioned on first launch with no key setup. Quota and reset date are visible at a glance."
+          },
+          {
+            "name": "Bring your own keys",
+            "body": "OpenAI, Gemini, DeepSeek, Qwen, and more. Keys are encrypted locally. Each scenario, from dialogue to image generation, picks its own model."
+          },
+          {
+            "name": "Everything local",
+            "body": "Data directory, database and attachment sizes, retention, sandbox runtimes, and network settings are all on your machine."
+          }
+        ],
+        "shots": [
+          {
+            "name": "settings",
+            "caption": "Models and keys: the managed tier, three BYOK keys, and per-scenario default models."
+          }
+        ]
+      }
+    ]
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From a Conversation to a Running Workflow.",
+    "lead": "This is the full path of one request, using real screens from the app. The request: every Monday at 09:00, collect last week's GitHub activity, write a digest, wait for approval, and file it in the Library.",
+    "steps": [
+      {
+        "shot": "chat",
+        "name": "1 · Describe the outcome",
+        "body": "You write one message. Anselm plans the work as a checklist, then creates each building block in order, reporting every tool call as a card you can open."
+      },
+      {
+        "shot": "workflow-editor",
+        "name": "2 · The workflow exists",
+        "body": "A cron trigger, three parallel GitHub fetches, an Agent that writes the digest, a Control node that skips empty weeks, an approval node, and two Handlers that file and announce. Open the graph editor and every node exposes its mapping, retry policy, and branches."
+      },
+      {
+        "shot": "scheduler-workflow",
+        "name": "3 · The first run fails, and that is fine",
+        "body": "The first manual run failed at the fetch node. Anselm fixed the Function, published version 2, and triggered a fresh run. Both runs stay in the matrix."
+      },
+      {
+        "shot": "scheduler",
+        "name": "4 · A run waits for you",
+        "body": "The second run collected 32 commits, wrote the digest, and parked at the approval node. The Gantt shows exactly where time went."
+      },
+      {
+        "shot": "notifications",
+        "name": "5 · Approve from the ledger",
+        "body": "The approval request is rendered in the notification ledger with the full digest. Approve, and the run resumes from that node."
+      },
+      {
+        "shot": "library",
+        "name": "6 · The digest is filed",
+        "body": "The document lands in Weekly digests with tags, an outline, and backlinks. Next Monday the cron fires on its own."
+      }
+    ]
+  },
+  "durablePage": {
+    "eyebrow": "Durable execution",
+    "title": "Built for Unattended Execution.",
+    "lead": "Workflows that run while you are away need more than retries. Anselm records every node result, pins versions for in-flight runs, pauses for human approval when a step needs it, and picks up exactly where it stopped after a restart.",
+    "topics": [
+      {
+        "shot": "scheduler",
+        "name": "Record once, replay never",
+        "body": "Each node result is written to the database as it completes. On recovery the interpreter re-walks the graph, reuses completed nodes, and only executes what has not run. External side effects are never repeated."
+      },
+      {
+        "shot": "scheduler-run",
+        "name": "Pinned versions",
+        "body": "A run pins the workflow version and every referenced entity version when it starts. Editing an Agent or Function never changes a run that is already in flight."
+      },
+      {
+        "shot": "notifications",
+        "name": "Human in the loop",
+        "body": "Approval nodes park the run as a persistent state. A person decides from the ledger or the Scheduler, or a timeout policy decides for them. Either way the run continues from that node."
+      },
+      {
+        "shot": "scheduler-overview",
+        "name": "Observable by design",
+        "body": "Every run has a matrix column, a Gantt, a dossier with entry payload and pinned references, and an activity log of what each Function, Handler, and Agent did."
+      }
+    ]
+  },
+  "durable": {
+    "eyebrow": "Durable execution",
+    "title": "Built for Unattended Execution.",
+    "body": "Workflows that run while you are away need more than retries. Anselm records every node result, pins versions for in-flight runs, pauses for human approval when a step needs it, and picks up exactly where it stopped after a restart.",
+    "points": [
+      {
+        "name": "Record once, replay never",
+        "body": "Completed nodes are reused on recovery. External side effects are not repeated."
+      },
+      {
+        "name": "Pinned versions",
+        "body": "Editing an entity never changes a run that is already in flight."
+      },
+      {
+        "name": "Human in the loop",
+        "body": "Approval nodes park the run and wait for a decision or a timeout policy."
+      },
+      {
+        "name": "Inspectable",
+        "body": "Every run has a node timeline, inputs, outputs, and the exact versions it used."
+      }
+    ],
+    "cta": "Read more about durable execution"
+  },
+  "capabilities": {
+    "eyebrow": "Capabilities",
+    "title": "Everything an Autonomous Workflow Needs.",
+    "items": [
+      {
+        "name": "Workflows",
+        "body": "Static graphs of triggers, actions, agents, controls, and approvals with typed edges."
+      },
+      {
+        "name": "Agents",
+        "body": "LLM workers with instructions, tools, skills, memory, and sub-agents."
+      },
+      {
+        "name": "Functions and Handlers",
+        "body": "Sandboxed code, stateless or stateful, created and maintained by AI."
+      },
+      {
+        "name": "Knowledge",
+        "body": "Documents, skills, and memory available to every agent and conversation."
+      },
+      {
+        "name": "Multimodal",
+        "body": "Images, audio, video, and documents flow through chat, agents, and workflows alike."
+      },
+      {
+        "name": "Integrations",
+        "body": "MCP servers, web search, and your own tools in one curated catalog."
+      }
+    ]
+  },
+  "deployment": {
+    "eyebrow": "Deployment",
+    "title": "Local-First. Your Data Stays on Your Machine.",
+    "body": "Anselm runs as a desktop app with all data in local SQLite and files. Use managed models through the Anselm API with no key setup, or bring your own provider keys.",
+    "local": {
+      "name": "Your machine",
+      "items": [
+        "Desktop app for macOS, Linux, and Windows",
+        "Single-user sidecar, SQLite storage",
+        "Sandboxed runtimes for code",
+        "Workspaces for isolation"
+      ]
+    },
+    "remote": {
+      "name": "Anselm API or your keys",
+      "items": [
+        "Managed models with no key setup",
+        "Image, speech, and video generation",
+        "Bring your own OpenAI, Gemini, Qwen, DeepSeek keys",
+        "Device-bound proof, no account required"
+      ]
+    }
+  },
+  "cta": {
+    "title": "Start Building Without Building the Stack.",
+    "primary": "Download",
+    "secondary": "Read the docs"
+  },
+  "download": {
+    "title": "Download Anselm",
+    "lead": "Free and open source. Choose your platform.",
+    "macos": "macOS",
+    "linux": "Linux",
+    "windows": "Windows",
+    "comingSoon": "First release coming soon",
+    "allReleases": "All releases on GitHub",
+    "version": "Version"
+  },
+  "footer": {
+    "tagline": "The agentic workflow platform that builds itself.",
+    "product": "Product",
+    "resources": "Resources",
+    "docs": "Documentation",
+    "architecture": "Architecture",
+    "releases": "Releases",
+    "license": "License",
+    "copyright": "© 2026 Anselm"
+  },
+  "service": {
+    "eyebrow": "Service domain",
+    "title": "Official service domain.",
+    "lead": "anselm.website is the official domain of the Anselm desktop application. The managed API used by the app is hosted at api.anselm.website.",
+    "sections": [
+      {
+        "name": "Scope",
+        "body": "This domain operates the Anselm application service and this website. The API is not an open proxy, a public relay, or a general-purpose AI gateway. Access is rate-limited and intended for Anselm clients only."
+      },
+      {
+        "name": "Hosts",
+        "body": "anselm.website serves this website. api.anselm.website serves the managed model and media API used by the desktop app. No other host under this domain is a public service."
+      },
+      {
+        "name": "Contact",
+        "body": "For security, abuse, or operational concerns, contact the operator through the project repository on GitHub or the repository owner."
+      }
+    ],
+    "footer": "Service domain"
+  }
+}

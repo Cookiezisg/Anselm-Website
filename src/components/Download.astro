@@ -1,0 +1,59 @@
+---
+import { t, RELEASES, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+
+const platforms = [
+  { key: 'macos', label: d.download.macos, match: /\.(dmg|zip)$/i, hint: /(mac|darwin|osx)/i,
+    icon: '<path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/>' },
+  { key: 'linux', label: d.download.linux, match: /\.(AppImage|deb|rpm|tar\.gz)$/i, hint: /linux/i,
+    icon: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01"/><path d="M9 15c.9.6 1.9 1 3 1s2.1-.4 3-1"/>' },
+  { key: 'windows', label: d.download.windows, match: /\.(msi|exe)$/i, hint: /win/i,
+    icon: '<path d="M3 5.5 11 4.4v7.3H3zM13 4.1 21 3v8.7h-8zM3 12.3h8v7.3l-8-1.1zM13 12.3h8V21l-8-1.1z"/>' },
+];
+---
+<section class="section" id="download">
+  <div class="wrap" style="text-align:center">
+    <h2>{d.download.title}</h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto;max-width:520px">{d.download.lead}</p>
+    <div class="dl-grid" data-releases="Cookiezisg/Anselm">
+      {platforms.map((p) => (
+        <article class="card dl" data-platform={p.key} data-match={p.match.source} data-hint={p.hint.source}>
+          <h3>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={p.icon} />
+            {p.label}
+          </h3>
+          <p class="dl-meta" data-meta>{d.download.comingSoon}</p>
+          <a class="btn btn-secondary" data-link href={RELEASES} rel="noopener">{d.nav.download}</a>
+        </article>
+      ))}
+    </div>
+    <p class="dl-more"><a href={RELEASES} rel="noopener">{d.download.allReleases}</a></p>
+  </div>
+</section>
+<script define:vars={{ versionLabel: d.download.version }}>
+  // Fill each platform card from the latest GitHub release. Any failure keeps the
+  // static "coming soon" state and the link to the releases page.
+  const grid = document.querySelector('[data-releases]');
+  if (grid) {
+    const repo = grid.getAttribute('data-releases');
+    fetch(`https://api.github.com/repos/${repo}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } })
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((rel) => {
+        const assets = Array.isArray(rel.assets) ? rel.assets : [];
+        for (const card of grid.querySelectorAll('[data-platform]')) {
+          const match = new RegExp(card.getAttribute('data-match'), 'i');
+          const hint = new RegExp(card.getAttribute('data-hint'), 'i');
+          const asset = assets.find((a) => match.test(a.name) && hint.test(a.name)) ?? assets.find((a) => match.test(a.name));
+          if (!asset) continue;
+          const mb = Math.round(asset.size / 1048576);
+          card.querySelector('[data-meta]').textContent = `${versionLabel} ${rel.tag_name} · ${mb} MB`;
+          const link = card.querySelector('[data-link]');
+          link.href = asset.browser_download_url;
+          link.classList.replace('btn-secondary', 'btn-primary');
+        }
+      })
+      .catch(() => {});
+  }
+</script>

@@ -1,0 +1,29 @@
+---
+import Shot from './Shot.astro';
+import { t, href, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const d = t(locale);
+---
+<section class="section" id="story">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">{d.story.eyebrow}</p>
+      <h2>{d.story.title}</h2>
+      <p class="lead">{d.story.lead}</p>
+    </div>
+    <ol class="story" style="list-style:none;margin:0;padding:0">
+      {d.story.steps.map((s, i) => (
+        <li class="story-step">
+          <div class="story-copy">
+            <span class="story-index">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.name}</h3>
+            <p>{s.body}</p>
+          </div>
+          <Shot name={s.shot} locale={locale} alt={s.body} full class="story-shot" />
+        </li>
+      ))}
+    </ol>
+    <p class="section-cta"><a class="btn btn-secondary" href={href(locale, '/how-it-works/')}>{d.story.cta}</a></p>
+  </div>
+</section>
