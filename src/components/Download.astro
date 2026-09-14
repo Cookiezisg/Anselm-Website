@@ -5,12 +5,15 @@ const { locale, heading = 'h2' } = Astro.props;
 const d = t(locale);
 const Heading = heading;
 
+// `match` lists accepted extensions in order of preference: the installer first, the portable
+// archive as a fallback, so a release that ships both offers the installer on the card.
+// match 按偏好排序:安装器优先,便携归档兜底;同时发布两者时卡片给出安装器。
 const platforms = [
   { key: 'macos', label: d.download.macos, match: /\.(dmg|zip)$/i, hint: /(mac|darwin|osx)/i,
     icon: '<path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 8 22c1.25 0 2.5-1.06 4-1.06Z"/><path d="M10 2c1 .5 2 2 2 5"/>' },
-  { key: 'linux', label: d.download.linux, match: /\.(AppImage|deb|rpm|tar\.gz)$/i, hint: /linux/i,
+  { key: 'linux', label: d.download.linux, match: /\.(AppImage|deb|rpm|tar\.gz)$/i, hint: /(linux|amd64|x86_64)/i,
     icon: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h.01M15 9h.01"/><path d="M9 15c.9.6 1.9 1 3 1s2.1-.4 3-1"/>' },
-  { key: 'windows', label: d.download.windows, match: /\.(msi|exe|zip)$/i, hint: /win/i,
+  { key: 'windows', label: d.download.windows, match: /\.(exe|msi|zip)$/i, hint: /win/i,
     icon: '<path d="M3 5.5 11 4.4v7.3H3zM13 4.1 21 3v8.7h-8zM3 12.3h8v7.3l-8-1.1zM13 12.3h8V21l-8-1.1z"/>' },
 ];
 ---
@@ -56,7 +59,11 @@ const platforms = [
         for (const card of cards) {
           const match = new RegExp(card.getAttribute('data-match'), 'i');
           const hint = new RegExp(card.getAttribute('data-hint'), 'i');
-          const asset = assets.find((a) => match.test(a.name) && hint.test(a.name));
+          // First extension in the pattern wins: exe before zip, AppImage before deb before tar.gz.
+          const order = match.source.match(/\(([^)]+)\)/)[1].split('|');
+          const candidates = assets.filter((a) => match.test(a.name) && hint.test(a.name));
+          const rank = (a) => order.findIndex((ext) => new RegExp(`\\.${ext}$`, 'i').test(a.name));
+          const asset = candidates.sort((a, b) => rank(a) - rank(b))[0];
           if (!asset) continue;
           const mb = Math.max(0.1, asset.size / 1048576).toFixed(1);
           card.querySelector('[data-meta]').textContent = `${labels.version} ${rel.tag_name} · ${mb} MB`;
