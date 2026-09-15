@@ -221,6 +221,8 @@ h3 { font-size: var(--t-h3); letter-spacing: -0.01em; }
 .dl .btn { width: 100%; }
 .dl-more { margin-top: var(--sp-6); font-size: var(--t-body); color: var(--ink-2); }
 .dl-more a { color: var(--accent); }
+.dl-signing { margin: var(--sp-4) auto 0; max-width: 560px; font-size: var(--t-meta); color: var(--ink-3); }
+.dl-signing a { color: var(--ink-2); text-decoration: underline; }
 
 /* ───── Footer ───── */
 .footer { border-top: var(--hairline) solid var(--line); padding: var(--sp-12) 0 var(--sp-8); font-size: var(--t-body); color: var(--ink-2); }

@@ -392,6 +392,8 @@
     "windows": "Windows",
     "comingSoon": "首个正式版即将发布",
     "allReleases": "在 GitHub 查看全部版本",
+    "signing": "macOS 构建已用 Developer ID 签名并经 Apple 公证。Windows 构建尚未签名；Anselm 已向 SignPath Foundation 申请面向开源项目的免费代码签名。详见{policy}。",
+    "signingPolicy": "签名政策",
     "version": "版本",
     "viewReleases": "查看发布页",
     "fromGithub": "安装包发布在 GitHub Releases",

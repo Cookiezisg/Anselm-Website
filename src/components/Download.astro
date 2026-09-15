@@ -34,6 +34,7 @@ const platforms = [
       ))}
     </div>
     <p class="dl-more"><a href={RELEASES} rel="noopener">{d.download.allReleases}</a></p>
+    <p class="dl-signing">{d.download.signing.split('{policy}')[0]}<a href="https://github.com/Cookiezisg/Anselm/blob/main/SECURITY.md#code-signing-policy" rel="noopener">{d.download.signingPolicy}</a>{d.download.signing.split('{policy}')[1]}</p>
   </div>
 </section>
 <script is:inline define:vars={{ labels: { version: d.download.version, download: d.nav.download, comingSoon: d.download.comingSoon, rateLimited: d.download.rateLimited } }}>

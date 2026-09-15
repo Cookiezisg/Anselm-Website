@@ -392,6 +392,8 @@
     "windows": "Windows",
     "comingSoon": "First release coming soon",
     "allReleases": "All releases on GitHub",
+    "signing": "macOS builds are signed with a Developer ID and notarized by Apple. Windows builds are not signed yet; Anselm has applied to SignPath Foundation for free open-source code signing. Read the {policy}.",
+    "signingPolicy": "code signing policy",
     "version": "Version",
     "viewReleases": "View releases",
     "fromGithub": "Builds are published on GitHub Releases",
