@@ -17,7 +17,7 @@
   "hero": {
     "eyebrow": "Local-first · Durable · macOS, Linux, Windows",
     "title": "The Agentic Workflow Platform That Builds Itself.",
-    "lead": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine. No orchestration code, no infrastructure to manage.",
+    "lead": "Describe what you need in plain language. Anselm creates the functions, agents, and workflows, schedules them, and runs them durably on your own machine. No orchestration code, no infrastructure to manage. Download, open, ask: no API key needed to start.",
     "primary": "Get Anselm",
     "secondary": "See how it works",
     "shotAlt": "Anselm desktop app showing a conversation that created a weekly digest workflow and is waiting for approval"

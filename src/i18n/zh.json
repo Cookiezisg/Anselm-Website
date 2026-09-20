@@ -17,7 +17,7 @@
   "hero": {
     "eyebrow": "本地优先 · 持久执行 · macOS、Linux、Windows",
     "title": "由 AI 自主编排的 Agentic Workflow 平台。",
-    "lead": "用一句话描述你要做的事。Anselm 自动创建函数、Agent 和工作流，安排调度，并在你自己的机器上持久运行。不写编排代码，不管基础设施。",
+    "lead": "用一句话描述你要做的事。Anselm 自动创建函数、Agent 和工作流，安排调度，并在你自己的机器上持久运行。不写编排代码，不管基础设施。下载、打开、直接问，不用 API key 就能开始。",
     "primary": "获取 Anselm",
     "secondary": "看它如何工作",
     "shotAlt": "Anselm 桌面端：一段对话创建了每周周报工作流，正在等待审批"
