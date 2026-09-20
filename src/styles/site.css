@@ -148,7 +148,7 @@ h3 { font-size: var(--t-h3); letter-spacing: -0.01em; }
   :root:not([data-theme="light"]) .shot-stage .shot-light { display: none; }
   :root:not([data-theme="light"]) .shot-stage .shot-dark { display: block; }
 }
-.shot-stage img { width: 100%; height: auto; border-radius: var(--r-chip) var(--r-chip) 0 0; box-shadow: var(--shadow-win); }
+.shot-stage img, .shot-stage video { display: block; width: 100%; height: auto; border-radius: var(--r-chip) var(--r-chip) 0 0; box-shadow: var(--shadow-win); }
 .shot-stage.full { padding-bottom: 48px; border-radius: var(--r-island); }
 .shot-stage.full::after { display: none; }
 .shot-stage.full img { border-radius: var(--r-chip); }
